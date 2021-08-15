@@ -85,11 +85,11 @@ class DeepLabV3PlusDetector:
         else:
             print("Time end must > time start!")
 
-    def getAverageTime(self):
+    def getAverageTimeMS(self):
         if self.detected_num == 0:
             return -1
 
-        return 1.0 * self.total_time_sum / self.detected_num
+        return int(1000.0 * self.total_time_sum / self.detected_num)
 
     def getAverageFPS(self):
         if self.detected_num == 0:
@@ -210,7 +210,7 @@ class DeepLabV3PlusDetector:
             result = self.model(image).max(1)[1].cpu().numpy()[0] # HW
         return result
 
-    def test(self, image_folder_path, run_episode=10, timer_skip_num=5):
+    def test(self, image_folder_path, run_episode=-1, timer_skip_num=5):
         if not self.model_ready:
             print("Model not ready yet, Please loadModel or check your model path first!")
             return
@@ -251,7 +251,7 @@ class DeepLabV3PlusDetector:
 
                     print("\rNet: " + self.model_name +
                           "\tDetected: " + str(self.detected_num) +
-                          "\tAvgTime: " + str(self.getAverageTime()) +
+                          "\tAvgTime: " + str(self.getAverageTimeMS()) + "ms"
                           "\tAvgFPS: " + str(self.getAverageFPS()) +
                           "    ", end="")
 
@@ -285,7 +285,7 @@ class DeepLabV3PlusDetector:
 
                 print("\rNet: " + self.model_name +
                       "\tDetected: " + str(self.detected_num) + "/" + str(total_num - timer_skip_num) +
-                      "\t\tAvgTime: " + str(self.getAverageTime()) +
+                      "\t\tAvgTime: " + str(self.getAverageTimeMS()) + "ms" +
                       "\tAvgFPS: " + str(self.getAverageFPS()) +
                       "    ", end="")
 
