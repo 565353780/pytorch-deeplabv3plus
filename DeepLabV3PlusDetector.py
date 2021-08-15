@@ -235,15 +235,13 @@ class DeepLabV3PlusDetector:
 
                     self.startTimer()
 
-                    image_file_path = os.path.join(image_folder_path, image_file_name)
                     image = Image.open(image_file_path).convert('RGB')
 
                     result = self.detect(image)
 
-                    colorized_result = deeplabv3plus_detector.decode_fn(result).astype('uint8')
-                    colorized_result = Image.fromarray(colorized_result)
-
-                    colorized_result.save(os.path.join("./result/", image_file_name.split('.')[0] +'.png'))
+                    #  colorized_result = deeplabv3plus_detector.decode_fn(result).astype('uint8')
+                    #  colorized_result = Image.fromarray(colorized_result)
+                    #  colorized_result.save(os.path.join("./result/", image_file_name.split('.')[0] +'.png'))
 
                     if timer_skipped_num < timer_skip_num:
                         self.endTimer(False)
@@ -271,22 +269,13 @@ class DeepLabV3PlusDetector:
 
                 self.startTimer()
 
-                image_file_path = os.path.join(image_folder_path, image_file_name)
                 image = Image.open(image_file_path).convert('RGB')
 
-                cv2.imshow("image", np.array(image, dtype=np.uint8))
-
                 result = self.detect(image)
-                cv2.imshow("result1", np.array(result, dtype=np.uint8) * 255)
 
-                colorized_result = deeplabv3plus_detector.decode_fn(result).astype('uint8')
-                cv2.imshow("result2", np.array(result, dtype=np.uint8) * 255)
-                colorized_result = Image.fromarray(colorized_result)
-                cv2.imshow("result3", np.array(result, dtype=np.uint8) * 255)
-                cv2.waitKey(0)
-                exit()
-
-                colorized_result.save(os.path.join("./result/", image_file_name.split('.')[0] +'.png'))
+                #  colorized_result = deeplabv3plus_detector.decode_fn(result).astype('uint8')
+                #  colorized_result = Image.fromarray(colorized_result)
+                #  colorized_result.save(os.path.join("./result/", image_file_name.split('.')[0] +'.png'))
 
                 if timer_skipped_num < timer_skip_num:
                     self.endTimer(False)
@@ -305,7 +294,7 @@ class DeepLabV3PlusDetector:
 
 if __name__ == '__main__':
     image_folder_path = "./sample_images/"
-    checkpoint = "./best_deeplabv3plus_resnet50_voc_os16.pth"
+    checkpoint = "./best_deeplabv3plus_resnet101_voc_os16.pth"
 
     deeplabv3plus_detector = DeepLabV3PlusDetector()
 
