@@ -293,8 +293,8 @@ class DeepLabV3PlusDetector:
 
 
 if __name__ == '__main__':
-    image_folder_path = "./sample_images/"
     checkpoint = "./best_deeplabv3plus_resnet101_voc_os16.pth"
+    image_folder_path = "./sample_images/"
 
     deeplabv3plus_detector = DeepLabV3PlusDetector()
 
