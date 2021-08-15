@@ -42,7 +42,7 @@ class DeepLabV3PlusDetector:
         self.model_name = None
         self.checkpoint = None
         self.checkpoint_ready = False
-        self.dataset = None
+        self.dataset_name = None
         self.model = None
         self.model_ready = False
         self.time_start = None
@@ -133,16 +133,16 @@ class DeepLabV3PlusDetector:
             self.model_name += 'plus'
         self.model_name += '_'
         self.model_name += self.valid_backend_name_list[backend_index]
-        self.dataset = self.valid_dataset_name_list[dataset_index]
+        self.dataset_name = self.valid_dataset_name_list[dataset_index]
 
         self.checkpoint_ready = True
         return
 
     def setDataset(self):
-        if self.dataset == 'voc':
+        if self.dataset_name == 'voc':
             self.num_classes = 21
             self.decode_fn = VOCSegmentation.decode_target
-        elif dataset == 'cityscapes':
+        elif self.dataset_name == 'cityscapes':
             self.num_classes = 19
             self.decode_fn = Cityscapes.decode_target
         return
@@ -176,7 +176,7 @@ class DeepLabV3PlusDetector:
             self.model.to(self.device)
             print("Resume model from %s" % self.checkpoint)
             print("Model loaded : ", self.model_name)
-            print("Dataset loaded : ", self.dataset)
+            print("Dataset loaded : ", self.dataset_name)
             del checkpoint_data
         else:
             print("[!] Retrain")
