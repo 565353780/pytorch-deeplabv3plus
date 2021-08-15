@@ -1,10 +1,14 @@
+# compiled
 __pycache__
-VOCdevkit
-checkpoints
-.vscode
 *.pyc
-__pycache__
-results
-checkpoints_bak
+
+# model
+*.pth
+
+# dataset
+VOCdevkit
 cityscapes
-test_results
+
+# output
+result
+
